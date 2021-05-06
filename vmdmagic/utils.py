@@ -6,10 +6,6 @@ def text2pdb(text):
     return next(iter(q1("assembly"))).split("-")[0]
 
 
-def print_format(input_string):
-    print(eval(f"f'{input_string}'"))
-
-
 def tcl_preamble():
     from importlib_resources import files
     import vmdmagic.tcl

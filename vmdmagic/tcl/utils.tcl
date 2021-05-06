@@ -115,3 +115,5 @@ proc RenderScene {} {
     axes location Off
     render TachyonInternal scene.tga /usr/bin/open %s
 }
+
+puts "MESSAGE_END"
