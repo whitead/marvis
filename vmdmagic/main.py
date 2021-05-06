@@ -8,7 +8,6 @@ import click
 @click.option('--port', default=None)
 def main(wav, vmd, port):
     vmd = VMDStream(port, vmd)
-    vmd.send('puts "HELLO WORLD!"')
     print('----------------------------------------------------------------')
     for i, query in enumerate(transcribe_wav_file(wav)):
         print(f'Text {i}: "{query}"')
