@@ -5,14 +5,15 @@ import click
 @click.command()
 @click.argument('wav', type=click.Path(exists=True))
 @click.option('--vmd', default='vmd')
-def main(wav, vmd):
-    vmd = VMD(vmd)
+@click.option('--port', default=None)
+def main(wav, vmd, port):
+    vmd = VMDStream(port, vmd)
+    vmd.send('puts "HELLO WORLD!"')
     print('----------------------------------------------------------------')
-    exit()
-    for query in transcribe_wav_file(wav):
-        print(f'Text: "{query}"')
+    for i, query in enumerate(transcribe_wav_file(wav)):
+        print(f'Text {i}: "{query}"')
         result = run_gpt_search(query)
-        print(f'Type: {result["type"]}')
-        print(f'Command: {result["data"]}')
-        vmd.communicate(input=result['data'].encode())
+        print(f'Type {i}: {result["type"]}')
+        print(f'Command {i}: {result["data"]}')
+        vmd.send(result['data'])
         print('----------------------------------------------------------------')
