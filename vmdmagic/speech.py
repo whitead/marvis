@@ -33,5 +33,5 @@ def transcribe_wav_file(speech_file):
         if last_word is not None:
             td = first_word - last_word
             time.sleep(td.seconds)
-        last_word = result.alternatives[0].words[-1].end_time
+        last_word = result.alternatives[0].words[0].end_time
         yield result.alternatives[0].transcript

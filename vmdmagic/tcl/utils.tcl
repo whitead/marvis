@@ -109,7 +109,7 @@ proc changerep {newstyle} {
     mol modstyle $repid $molid $newstyle
 }
 
-proc RenderScene {} {
+proc Render {} {
     color Display Background white
     display projection Orthographic
     axes location Off
