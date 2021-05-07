@@ -15,9 +15,11 @@ AutoFocusSel
 > take a picture of this scene
 Render
 > get that part into focus
-AutoFocusSel
-> rotate by 45 degrees along the z-axis
-rotate z by 45 1
+ZoomSel
+> rotate by 30 degrees along the y-axis
+rotate y by 30 1
+> Zoom in on them
+ZoomSel
 '''
 _vmd_select_prompt = '''> select the protein
 set sel [atomselect top "protein"]

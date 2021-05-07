@@ -26,5 +26,6 @@ setup(name='vmdmagic',
       entry_points='''
         [console_scripts]
         vmdmagic=vmdmagic.main:main
+        vmdmagic-text=vmdmagic.main:text
             '''
       )

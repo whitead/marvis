@@ -72,7 +72,7 @@ proc AutoScaleAllVisible {{zoom_factor 1}} {
   }
 }
 
-proc AutoFocusSel {} {
+proc ZoomSel {} {
   global sel
   puts $sel
 
