@@ -43,7 +43,8 @@ def _query_gpt3(query, training_string, T=0.2):
         temperature=T,
         max_tokens=64,
         top_p=1,
-        frequency_penalty=0.0,
+        best_of=4,
+        frequency_penalty=0.1,
         presence_penalty=0,
         stop=['\n']
     )
