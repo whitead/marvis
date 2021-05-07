@@ -94,7 +94,7 @@ proc ZoomSel {} {
   return
 }
 
-proc addrep {newstyle} {
+proc addrep {sel newstyle} {
     global sel
     set molid top
     mol addrep $molid
@@ -184,7 +184,7 @@ close $main
 set rc [catch $line result]
 if { $rc } {
 #puts $sock "Error executing comand '$line': n$result"
-puts "Error executing comand '$line': n$result"
+puts "Error executing comand '$line': $result"
 } else {
 #puts $sock $result
 #puts $result

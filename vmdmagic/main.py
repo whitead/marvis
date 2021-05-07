@@ -16,6 +16,7 @@ def main(wav, vmd, port):
         print(f'({i}) Command: {result["data"]}')
         vmd.send(result['data'])
         print('----------------------------------------------------------------')
+    vmd.wait()
 
 
 @click.command()

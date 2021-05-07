@@ -27,10 +27,14 @@ class VMDStream:
     def close(self):
         ''' Close the connection to VMD '''
         if not self.closed:
-            self.send('exit')
+            if self.p.poll() is None:
+                self.send('exit')
+                self.p.wait(5)
             self.s.close()
-            self.p.wait(5)
             self.closed = True
+
+    def wait(self):
+        self.p.wait()
 
     def __del__(self):
         self.close()
@@ -38,5 +42,5 @@ class VMDStream:
     def send(self, sendstring):
         ''' Send a command directly to VMD '''
         # can't be wrong to add this?
-        sendstring += '\n'
+        sendstring += os.linesep
         self.s.send(sendstring.encode())

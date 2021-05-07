@@ -7,24 +7,26 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 _vmd_cmd_prompt = '''> switch the representation to NewCartoon
 changerep NewCartoon
 > make them Ribbons
-addrep Ribbons
+addrep $sel Ribbons
 > switch style to CPK
 changerep CPK
 > enhance on it
-AutoFocusSel
+AutoFocus $sel
 > take a picture of this scene
 Render
 > get that part into focus
-ZoomSel
+ZoomSel $sel
 > rotate by 30 degrees along the y-axis
 rotate y by 30 1
 > Zoom in on them
-ZoomSel
+ZoomSel $sel
 '''
 _vmd_select_prompt = '''> select the protein
 set sel [atomselect top "protein"]
 > select waters within five of residue number 10
 set sel [atomselect top "water within 5 of resid 10"]
+> select the glycines
+set sel [atomselect top "resname GLY"]
 > select the alpha carbons of residues lysines and valines
 set sel [atomselect top "name CA and resname LYS VAL"]
 > select the oxygen atoms in the lipids
