@@ -72,10 +72,7 @@ proc AutoScaleAllVisible {{zoom_factor 1}} {
   }
 }
 
-proc ZoomSel {} {
-  global sel
-  puts $sel
-
+proc ZoomSel {sel} {
   set molid top
   set prog 1
   set me [lindex [info level [info level]] 0]
@@ -95,7 +92,6 @@ proc ZoomSel {} {
 }
 
 proc addrep {sel newstyle} {
-    global sel
     set molid top
     mol addrep $molid
     set repid [expr [molinfo $molid get numreps]-1]
@@ -139,6 +135,7 @@ proc Render {} {
 namespace eval remote_ctl {
 variable main
 variable clients
+global sel
 variable default_vmd_port
 set default_vmd_port 5555
 # I am too dumb to set the default value for port from

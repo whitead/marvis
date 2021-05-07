@@ -36,7 +36,7 @@ set sel [atomselect top "resid -4"]
 '''
 
 
-def _query_gpt3(query, training_string, T=0.2):
+def _query_gpt3(query, training_string, T=0.15):
     prompt = '\n'.join([training_string, '> ' + query, ''])
     # return prompt
     response = openai.Completion.create(
