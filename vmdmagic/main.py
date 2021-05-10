@@ -3,14 +3,22 @@ import click
 
 
 @click.command()
-@click.argument('wav', type=click.Path(exists=True))
+@click.option('--wav', type=click.Path(exists=True), default=None)
 @click.option('--vmd', default='vmd')
 @click.option('--port', default=None)
-def main(wav, vmd, port):
-    vmd = VMDStream(port, vmd)
+@click.option('--mock', default=False, is_flag=True)
+def main(wav, vmd, port, mock):
+    if mock:
+        vmd = VMDMock()
+    else:
+        vmd = VMDStream(port, vmd)
     sel = ''
     print('----------------------------------------------------------------')
-    for i, query in enumerate(transcribe_wav_file(wav)):
+    if wav:
+        qiter = transcribe_wav_file(wav)
+    else:
+        qiter = microphone_iter()
+    for i, query in enumerate(qiter):
         print(f'({i}) Text: "{query}"')
         result = run_gpt_search(query)
         print(f'({i}) Type: {result["type"]}')
@@ -26,11 +34,13 @@ def main(wav, vmd, port):
 
 @click.command()
 @click.argument('text', nargs=-1)
-def text(text):
-    print('----------------------------------------------------------------')
+@click.option('--transcript', default=None)
+def text(text, transcript):
     query = ' '.join(text)
     print(f'Text: "{query}"')
     result = run_gpt_search(query)
-    print(f'Type: {result["type"]}')
-    print(f'Command: {result["data"]}')
-    print('----------------------------------------------------------------')
+    print(f'> ({result["type"]}) {result["data"]}')
+    if transcript is not None:
+        with open(transcript, 'a') as f:
+            f.write(f'{query}\n')
+            f.write(f'> ({result["type"]}) {result["data"]}\n')

@@ -18,7 +18,7 @@ setup(name='vmdmagic',
           'openai',
           'rcsbsearch',
           'google-cloud-speech',
-          'importlib_resources'],
+          'importlib_resources'          ],
       test_suite='tests',
       zip_safe=True,
       includes_package_data=True,
@@ -26,6 +26,6 @@ setup(name='vmdmagic',
       entry_points='''
         [console_scripts]
         vmdmagic=vmdmagic.main:main
-        vmdmagic-text=vmdmagic.main:text
+        vmt=vmdmagic.main:text
             '''
       )

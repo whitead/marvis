@@ -7,6 +7,14 @@ import tempfile
 from .utils import tcl_preamble, find_free_port
 
 
+class VMDMock:
+    def __init__(self, *args):
+        pass
+    def send(self, sendstring):
+        print('Mock Sending: "{sendstring}"')
+    def wait(self):
+        pass
+
 # See https://github.com/hockyg/pyvmdstream
 class VMDStream:
     def __init__(self, port, vmd_exe):
