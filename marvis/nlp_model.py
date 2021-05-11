@@ -12,6 +12,8 @@ addrep $sel Ribbons
 changerep CPK
 > enhance on it
 AutoFocus $sel
+> color by residue name
+colorby ResName
 > take a picture of this scene
 Render
 > get that part into focus

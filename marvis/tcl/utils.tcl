@@ -105,6 +105,13 @@ proc changerep {newstyle} {
     mol modstyle $repid $molid $newstyle
 }
 
+proc colorby {cmethod} {
+    set molid top
+    set repid [expr [molinfo $molid get numreps]-1]
+    mol modcolor $repid $molid $cmethod
+}
+
+
 proc Render {} {
     color Display Background white
     display projection Orthographic
