@@ -10,12 +10,16 @@ from .utils import tcl_preamble, find_free_port
 class VMDMock:
     def __init__(self, *args):
         pass
+
     def send(self, sendstring):
-        print('Mock Sending: "{sendstring}"')
+        print(f'Mock Sending: "{sendstring}"')
+
     def wait(self):
         pass
 
 # See https://github.com/hockyg/pyvmdstream
+
+
 class VMDStream:
     def __init__(self, port, vmd_exe):
         if port is None:
@@ -27,8 +31,16 @@ class VMDStream:
         self.p = subprocess.Popen([vmd_exe, '-e', tmp_name], shell=True)
         time.sleep(5)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect(('127.0.0.1', port))
-        # time.sleep(2)
+        for i in range(5):
+            try:
+                s.connect(("127.0.0.1", port))
+            except Exception as e:
+                if str(e).find('already connected') != -1:
+                    # already connected
+                    break
+                else:
+                    print(e)
+            time.sleep(2)
         self.s = s
         self.closed = False
 

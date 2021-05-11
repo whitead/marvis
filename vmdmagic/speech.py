@@ -1,7 +1,7 @@
 from google.cloud import speech
 import io
 import time
-import re
+import os
 import sys
 from six.moves import queue
 from copy import copy
@@ -9,6 +9,7 @@ from copy import copy
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
+
 
 def transcribe_wav_file(speech_file):
     '''Transcribe the given audio file.'''
@@ -42,6 +43,7 @@ def transcribe_wav_file(speech_file):
             time.sleep(td.seconds)
         last_word = result.alternatives[0].words[0].end_time
         yield result.alternatives[0].transcript
+
 
 class _MicrophoneStream(object):
     """Opens a recording stream as a generator yielding the audio chunks."""
@@ -119,7 +121,7 @@ class _MicrophoneStream(object):
             yield b"".join(data)
 
 
-def _listen_print_loop(responses):
+def _listen_print_loop(responses, line_end=os.linesep):
     """Iterates through server responses and prints them.
 
     The responses passed is a generator that will block until a response
@@ -163,7 +165,7 @@ def _listen_print_loop(responses):
             num_chars_printed = len(transcript)
 
         else:
-            print(transcript + overwrite_chars)
+            print(transcript + overwrite_chars, end=line_end)
             num_chars_printed = 0
             yield transcript + overwrite_chars
 
@@ -196,16 +198,13 @@ def microphone_iter(safe_mode=False):
         # Now, put the transcription responses to use.
         q_cache = None
         if safe_mode is True:
-            print("Listening...")
-        for q in _listen_print_loop(responses):
+            print('[Safe Mode] Say "confirm" to execute a command')
+        for q in _listen_print_loop(responses, line_end=' [confirm?]' + os.linesep if safe_mode else os.linesep):
             if safe_mode is True:
-                print("q_cache:",q_cache)
-                if q_cache is None or q.lower().find('confirm')<0:             
-                    print("Say 'confirm' to print the command:",q)
-                    print("...or say a new command")
+                if q_cache is None or q.lower().find('confirm') < 0:
                     q_cache = copy(q)
                 else:
-                    print("Command confirmed")
+                    print('')
                     yield q_cache
                     q_cache = None
             else:
