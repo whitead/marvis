@@ -9,6 +9,14 @@ It also contains code to control VMD via audio commands contained in a .wav reco
 Converting text queries into VMD commands requires an OpenAI API key that allows access to the GPT-3 model.
 Live speak-to-text requies [a google cloud speech-to-text authentication](https://googleapis.dev/python/speech/latest/index.html#quick-start)
 
+## Example
+Here is an example in text mode
+
+
+https://user-images.githubusercontent.com/908389/117870697-71c5d480-b26a-11eb-81a3-60e4f7ed06d3.mp4
+
+
+
 ## Installation
 - Installation can be performed with the command `pip install -e .` inside the main directory. We recommend doing this inside of a virtual environment.
 - Transcription of live audio requires the additional installation of the pyaudio package (in conda, this can be achieved by `conda install pyaudio`).
