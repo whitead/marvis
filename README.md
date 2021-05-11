@@ -13,6 +13,11 @@ Live speak-to-text requies a google cloud speak-to-text license file.
 - Installation can be performed with the command `pip install -e .` inside the main directory. We recommend doing this inside of a virtual environment.
 - Transcription of live audio requires the additional installation of the pyaudio package (in conda, this can be achieved by `conda install pyaudio`).
 
+Use of the two APIs above requires setting environment variables. In `BASH`, one would do
+
+        export GOOGLE_APPLICATION_CREDENTIALS=path_to_google_api_license_file.json
+        export OPENAI_API_KEY=$(cat path_to_GPT_SECRET_KEY.txt )
+
 ## Usage
 After installation, the commands `marvis`, `marvis-text`, and `vmt` will be added to your path. 
 
