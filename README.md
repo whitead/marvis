@@ -19,11 +19,11 @@ Use of the two APIs above requires setting environment variables. In `BASH`, one
         export OPENAI_API_KEY=$(cat path_to_GPT_SECRET_KEY.txt )
 
 ## Usage
-After installation, the commands `marvis`, `marvis-text`, and `vmt` will be added to your path. 
+After installation, the commands `marvis`, `marvis-text` will be added to your path. 
 
-To convert text commands to VMD commands, use the `vmt`, for example:
+To convert text commands to VMD commands, use the `marvis-text`, for example:
 
-    $ vmt "rotate the protein around the z axis by 45 degrees"
+    $ marvis-text --mock "rotate the protein around the z axis by 45 degrees"
     Text: "rotate the protein around the z axis by 45 degrees"
     > (VMD Command) rotate z by 45 1
 
