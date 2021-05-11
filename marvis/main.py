@@ -1,4 +1,4 @@
-from vmdmagic import *
+from marvis import *
 import click
 
 
@@ -7,14 +7,14 @@ import click
 @click.option('--vmd', default='vmd')
 @click.option('--port', default=None)
 @click.option('--mock', default=False, is_flag=True)
-@click.option('--safe_mode',default=False, is_flag=True)
+@click.option('--safe_mode', default=False, is_flag=True)
 def main(wav, vmd, port, mock, safe_mode):
     if mock:
         vmd = VMDMock()
     else:
         vmd = VMDStream(port, vmd)
     sel = ''
-    print('----------------------------------------------------------------')
+    print('-----------------------Listening...-----------------------------')
     if wav:
         qiter = transcribe_wav_file(wav)
     else:

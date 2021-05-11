@@ -10,8 +10,8 @@ def text2pdb(text):
 
 def tcl_preamble(port):
     from importlib_resources import files
-    import vmdmagic.tcl
-    fp = files(vmdmagic.tcl).joinpath(
+    import marvis.tcl
+    fp = files(marvis.tcl).joinpath(
         'utils.tcl')
     with open(fp, 'r') as f:
         s = f.read()
