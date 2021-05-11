@@ -14,7 +14,9 @@ def main(wav, vmd, port, mock, safe_mode):
     else:
         vmd = VMDStream(port, vmd)
     sel = ''
-    print('-----------------------Listening...-----------------------------')
+    print('==========================')
+    print('==== MARVIS IS READY =====')
+    print('==========================')
     if wav:
         qiter = transcribe_wav_file(wav)
     else:
@@ -29,7 +31,6 @@ def main(wav, vmd, port, mock, safe_mode):
             sel = result['data']
         else:
             vmd.send(sel + ';' + result['data'])
-        print('----------------------------------------------------------------')
     vmd.wait()
 
 
