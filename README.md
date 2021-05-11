@@ -6,8 +6,8 @@ This repository is a proof of principle for performing Molecular Dynamics analys
 It contains code to generate VMD commands from natural language queries given as text commands. 
 It also contains code to control VMD via audio commands contained in a .wav recording, and via a live speak-to-text interface.
 
-Converting text queries into VMD commands requires an active OpenAI license that allows access to the GPT-3 model.
-Live speak-to-text requies a google cloud speak-to-text license file.
+Converting text queries into VMD commands requires an OpenAI API key that allows access to the GPT-3 model.
+Live speak-to-text requies [a google cloud speech-to-text authentication](https://googleapis.dev/python/speech/latest/index.html#quick-start)
 
 ## Installation
 - Installation can be performed with the command `pip install -e .` inside the main directory. We recommend doing this inside of a virtual environment.
@@ -16,7 +16,7 @@ Live speak-to-text requies a google cloud speak-to-text license file.
 Use of the two APIs above requires setting environment variables. In `BASH`, one would do
 
         export GOOGLE_APPLICATION_CREDENTIALS=path_to_google_api_license_file.json
-        export OPENAI_API_KEY=$(cat path_to_GPT_SECRET_KEY.txt )
+        export OPENAI_API_KEY=sh-....
 
 ## Usage
 After installation, the commands `marvis`, `marvis-text` will be added to your path. 
