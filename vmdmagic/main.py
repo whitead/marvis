@@ -7,7 +7,8 @@ import click
 @click.option('--vmd', default='vmd')
 @click.option('--port', default=None)
 @click.option('--mock', default=False, is_flag=True)
-def main(wav, vmd, port, mock):
+@click.option('--safe_mode',default=False, is_flag=True)
+def main(wav, vmd, port, mock, safe_mode):
     if mock:
         vmd = VMDMock()
     else:
@@ -17,7 +18,7 @@ def main(wav, vmd, port, mock):
     if wav:
         qiter = transcribe_wav_file(wav)
     else:
-        qiter = microphone_iter()
+        qiter = microphone_iter(safe_mode)
     for i, query in enumerate(qiter):
         print(f'({i}) Text: "{query}"')
         result = run_gpt_search(query)

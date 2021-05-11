@@ -4,6 +4,7 @@ import time
 import re
 import sys
 from six.moves import queue
+from copy import copy
 
 # Audio recording parameters
 RATE = 16000
@@ -167,7 +168,7 @@ def _listen_print_loop(responses):
             yield transcript + overwrite_chars
 
 
-def microphone_iter():
+def microphone_iter(safe_mode=False):
     # See http://g.co/cloud/speech/docs/languages
     # for a list of supported languages.
     language_code = "en-US"  # a BCP-47 language tag
@@ -193,5 +194,19 @@ def microphone_iter():
         responses = client.streaming_recognize(streaming_config, requests)
 
         # Now, put the transcription responses to use.
+        q_cache = None
+        if safe_mode is True:
+            print("Listening...")
         for q in _listen_print_loop(responses):
-            yield q
+            if safe_mode is True:
+                print("q_cache:",q_cache)
+                if q_cache is None or q.lower().find('confirm')<0:             
+                    print("Say 'confirm' to print the command:",q)
+                    print("...or say a new command")
+                    q_cache = copy(q)
+                else:
+                    print("Command confirmed")
+                    yield q_cache
+                    q_cache = None
+            else:
+                yield q
