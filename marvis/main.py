@@ -5,7 +5,7 @@ import click
 @click.command()
 @click.option('--wav', type=click.Path(exists=True), default=None)
 @click.option('--vmd', default='vmd')
-@click.option('--port', default=None)
+@click.option('--port', default=None, type=int)
 @click.option('--mock', default=False, is_flag=True)
 @click.option('--safe_mode', default=False, is_flag=True)
 def main(wav, vmd, port, mock, safe_mode):
