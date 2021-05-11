@@ -18,6 +18,7 @@ setup(name='marvis',
           'openai',
           'rcsbsearch',
           'google-cloud-speech',
+          'prompt_toolkit',
           'importlib_resources'],
       test_suite='tests',
       zip_safe=True,
@@ -26,6 +27,6 @@ setup(name='marvis',
       entry_points='''
         [console_scripts]
         marvis=marvis.main:main
-        vmt=marvis.main:text
+        marvis-text=marvis.main:text
             '''
       )

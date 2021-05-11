@@ -1,6 +1,9 @@
 import socket
 from contextlib import closing
 import rcsbsearch
+from prompt_toolkit import PromptSession
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
+from prompt_toolkit.history import InMemoryHistory
 
 
 def text2pdb(text):
@@ -23,3 +26,20 @@ def find_free_port():
         s.bind(('', 0))
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         return s.getsockname()[1]
+
+
+def text_iter():
+    history = InMemoryHistory()
+    session = PromptSession(
+        history=history,
+        auto_suggest=AutoSuggestFromHistory(),
+        enable_history_search=True,
+        complete_while_typing=True
+    )
+    while True:
+        q = session.prompt('marvis-text> ')
+        if q.lower() == 'exit' or q.lower() == 'q' or q.lower == 'quit':
+            break
+        if q.strip() == '':
+            continue
+        yield q
