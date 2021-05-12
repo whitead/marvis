@@ -29,17 +29,17 @@ def find_free_port():
 
 
 def text_iter():
-    history = InMemoryHistory()
-    session = PromptSession(
-        history=history,
-        auto_suggest=AutoSuggestFromHistory(),
-        enable_history_search=True,
-        complete_while_typing=True
-    )
+    #history = InMemoryHistory()
+    # session = PromptSession(
+    #    history=history,
+    # auto_suggest=AutoSuggestFromHistory(),
+    # enable_history_search=True,
+    # complete_while_typing=True
+    # )
     while True:
-        q = session.prompt('marvis-text> ')
-        if q.lower() == 'exit' or q.lower() == 'q' or q.lower == 'quit':
-            break
+        # this always freezes on windows. Looks cool though!
+        #q = session.prompt('marvis-text> ')
+        q = input('marvis-text> ')
         if q.strip() == '':
             continue
         yield q

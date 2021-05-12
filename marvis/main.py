@@ -22,6 +22,8 @@ def main(wav, vmd, port, mock, safe_mode):
     else:
         qiter = microphone_iter(safe_mode)
     for i, query in enumerate(qiter):
+        if query.lower() == 'exit' or query.lower() == 'q' or query.lower == 'quit':
+            break
         print(f'({i}) Text: "{query}"')
         result = run_gpt_search(query)
         print(f'({i}) Type: {result["type"]}')
@@ -51,6 +53,8 @@ def text(vmd, port, mock, safe_mode, transcript):
     sel = ''
     trans = []
     for i, query in enumerate(text_iter()):
+        if query.lower() == 'exit' or query.lower() == 'q' or query.lower == 'quit':
+            break
         result = run_gpt_search(query)
         # have to cache selection because vmd sockets are weird
         if result['type'] == 'VMD Selection':

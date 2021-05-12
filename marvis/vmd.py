@@ -28,7 +28,7 @@ class VMDStream:
         fd, tmp_name = tempfile.mkstemp(text=True)
         with open(fd, 'w') as f:
             f.write(tp)
-        self.p = subprocess.Popen([vmd_exe, '-e', tmp_name], shell=True)
+        self.p = subprocess.Popen([vmd_exe, '-e', tmp_name])
         time.sleep(5)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         for i in range(5):
