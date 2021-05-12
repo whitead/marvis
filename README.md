@@ -18,7 +18,10 @@ https://user-images.githubusercontent.com/908389/117870697-71c5d480-b26a-11eb-81
 
 
 ## Installation
-- Installation can be performed with the command `pip install -e .` inside the main directory. We recommend doing this inside of a virtual environment.
+- Installation can be performed with `pip`. We recommend doing this inside of a virtual environment.
+```sh
+pip install marvis@git+git://github.com/whitead/marvis.git
+```
 - Transcription of live audio requires the additional installation of the pyaudio package (in conda, this can be achieved by `conda install pyaudio`).
 
 Use of the two APIs above requires setting environment variables. In `BASH`, one would do
