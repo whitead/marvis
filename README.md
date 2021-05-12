@@ -41,6 +41,13 @@ In the simplest case, simply type
 
     $ marvis 
 
-To run `marvis` on a Mac in "safe mode", one might do:
+The flag `--safe_mode` can be used to ask for confirmation of voice to text before sending the command to OpenAI
 
-    $ marvis --vmd "/Applications/VMD\ 1.9.4a51-x86_64-Rev9.app/Contents/vmd/vmd_MACOSXX86_64" --safe_mode
+To run `marvis` on a Mac, where VMD is in the applications folder, one might want to create a vmd.sh script such as:
+
+        #!/bin/bash
+        /Applications/VMD\ 1.9.4a51-x86_64-Rev9.app/Contents/vmd/vmd_MACOSXX86_64 $*
+
+And then run:
+
+        $ marvis --vmd ./vmd.sh 
