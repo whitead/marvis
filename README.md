@@ -29,12 +29,17 @@ Use of the two APIs above requires setting environment variables. In `BASH`, one
 ## Usage
 After installation, the commands `marvis`, `marvis-text` will be added to your path. 
 
-To convert text commands to VMD commands, use the `marvis-text`, for example:
+To convert text commands to VMD commands, use the `marvis-text`. For example, `marvis-text --mock` brings up an interactive prompt:
 
-    $ marvis-text --mock "rotate the protein around the z axis by 45 degrees"
-    Text: "rotate the protein around the z axis by 45 degrees"
-    > (VMD Command) rotate z by 45 1
-
+        $ marvis-text --mock 
+        ==========================
+        ==== MARVIS IS READY =====
+        ==========================
+        marvis-text> rotate the protein around the z axis by 45 degrees
+        Mock Sending: ";rotate z by 45 1"
+        (VMD Command)|rotate z by 45 1
+        marvis-text>
+        
 To interface with VMD in live mode, use `marvis` or `marvis-text`. The `--vmd` flag can be used to specify the path to VMD, which by default is `vmd`. 
 
 In the simplest case, simply type 
